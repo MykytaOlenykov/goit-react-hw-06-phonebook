@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm';
+import { Filter } from 'components/Filter';
 import { GlobalStyle } from 'components/GlobalStyle';
 import {
   Container,
   PrimaryTitle,
   SecondaryTitle,
-  SearchInput,
   List,
   Item,
 } from './App.styled';
@@ -22,7 +22,7 @@ export class App extends Component {
     filter: '',
   };
 
-  handleChange = e => {
+  changeFilter = e => {
     const { value } = e.target;
 
     this.setState({ filter: value });
@@ -52,20 +52,12 @@ export class App extends Component {
     return (
       <Container>
         <GlobalStyle />
-        <PrimaryTitle>Phonebook</PrimaryTitle>
 
+        <PrimaryTitle>Phonebook</PrimaryTitle>
         <ContactForm onSubmit={this.addContact} />
 
         <SecondaryTitle>Contacts</SecondaryTitle>
-
-        <p>Find contacts by name</p>
-        <SearchInput
-          onChange={this.handleChange}
-          value={filter}
-          name="filter"
-          type="text"
-        />
-
+        <Filter value={filter} onChange={this.changeFilter} />
         <List>
           {filteredContacts.map(({ id, name, number }) => (
             <Item key={id}>

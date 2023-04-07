@@ -13,22 +13,6 @@ export const SecondaryTitle = styled.h2`
   margin-bottom: 12px;
 `;
 
-export const SearchInput = styled.input`
-  display: block;
-  max-width: 200px;
-  margin-top: 8px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.primaryBg};
-  border-radius: 4px;
-  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.12),
-    0px 1px 1px rgba(0, 0, 0, 0.14);
-
-  :focus {
-    outline: 2px solid ${({ theme }) => theme.colors.secondaryBg};
-  }
-`;
-
 export const List = styled.ul`
   padding-left: 20px;
 `;
