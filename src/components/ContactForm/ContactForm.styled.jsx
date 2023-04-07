@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Form = styled.form`
   margin-bottom: 20px;
   padding: 20px;
+  max-width: 300px;
   border: 1px solid ${({ theme }) => theme.colors.primaryBg};
   border-radius: 8px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),

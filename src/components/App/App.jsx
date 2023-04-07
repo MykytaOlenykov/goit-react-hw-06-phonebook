@@ -24,11 +24,27 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    if (this.validatorContact(name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     const newContact = { id: nanoid(), name, number };
 
     this.setState(({ contacts }) => ({
       contacts: [newContact, ...contacts],
     }));
+  };
+
+  deleteContact = contactId => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(({ id }) => id !== contactId),
+    }));
+  };
+
+  validatorContact = newName => {
+    const { contacts } = this.state;
+    return contacts.some(({ name }) => name === newName);
   };
 
   getFilterContacts = () => {
@@ -53,7 +69,10 @@ export class App extends Component {
 
         <SecondaryTitle>Contacts</SecondaryTitle>
         <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList contacts={filteredContacts} />
+        <ContactList
+          contacts={filteredContacts}
+          onDeleteContact={this.deleteContact}
+        />
       </Container>
     );
   }
