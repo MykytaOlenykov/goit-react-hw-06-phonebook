@@ -3,13 +3,8 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { GlobalStyle } from 'components/GlobalStyle';
-import {
-  Container,
-  PrimaryTitle,
-  SecondaryTitle,
-  List,
-  Item,
-} from './App.styled';
+import { Container, PrimaryTitle, SecondaryTitle } from './App.styled';
+import { ContactList } from 'components/ContactList';
 
 export class App extends Component {
   state = {
@@ -58,15 +53,7 @@ export class App extends Component {
 
         <SecondaryTitle>Contacts</SecondaryTitle>
         <Filter value={filter} onChange={this.changeFilter} />
-        <List>
-          {filteredContacts.map(({ id, name, number }) => (
-            <Item key={id}>
-              <p>
-                {name}: {number}
-              </p>
-            </Item>
-          ))}
-        </List>
+        <ContactList contacts={filteredContacts} />
       </Container>
     );
   }
