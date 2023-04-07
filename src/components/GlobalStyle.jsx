@@ -32,7 +32,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: ${({ theme }) => theme.colors.primary}
+  color: ${({ theme }) => theme.colors.primaryText};
+  background-color: ${({ theme }) => theme.colors.primary};
 }
 
 code {

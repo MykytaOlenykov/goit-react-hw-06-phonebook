@@ -66,6 +66,7 @@ export const Label = styled.label`
 
 export const Button = styled.button`
   padding: 4px 12px;
+  color: ${({ theme }) => theme.colors.primaryText};
   background-color: ${({ theme }) => theme.colors.primaryBg};
   border: none;
   border-radius: 8px;
