@@ -24,7 +24,7 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
-    if (this.validatorContact(name)) {
+    if (this.contactValidationByName(name)) {
       alert(`${name} is already in contacts.`);
       return;
     }
@@ -42,7 +42,7 @@ export class App extends Component {
     }));
   };
 
-  validatorContact = newName => {
+  contactValidationByName = newName => {
     const { contacts } = this.state;
     return contacts.some(({ name }) => name === newName);
   };
