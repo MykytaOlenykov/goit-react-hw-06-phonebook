@@ -5,17 +5,36 @@ import { Filter } from 'components/Filter';
 import { GlobalStyle } from 'components/GlobalStyle';
 import { Container, PrimaryTitle, SecondaryTitle } from './App.styled';
 import { ContactList } from 'components/ContactList';
+import { storageKeys } from 'constants';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem(
+      storageKeys.DATA_CONTACTS_L_STORAGE_KEY
+    );
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const prevContacts = prevState.contacts;
+    const nextContacts = this.state.contacts;
+
+    if (nextContacts !== prevContacts) {
+      localStorage.setItem(
+        storageKeys.DATA_CONTACTS_L_STORAGE_KEY,
+        JSON.stringify(nextContacts)
+      );
+    }
+  }
 
   changeFilter = e => {
     const { value } = e.target;
