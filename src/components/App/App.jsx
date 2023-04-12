@@ -17,9 +17,9 @@ export class App extends Component {
     const contacts = localStorage.getItem(
       storageKeys.DATA_CONTACTS_L_STORAGE_KEY
     );
-    const parsedContacts = JSON.parse(contacts);
 
-    if (parsedContacts) {
+    if (contacts) {
+      const parsedContacts = JSON.parse(contacts);
       this.setState({ contacts: parsedContacts });
     }
   }
