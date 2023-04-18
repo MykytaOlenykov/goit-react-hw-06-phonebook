@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { GlobalStyle } from 'components/GlobalStyle';
-import { Container, PrimaryTitle, SecondaryTitle } from './App.styled';
+import * as S from './App.styled';
 import { ContactList } from 'components/ContactList';
 import { storageKeys } from 'constants';
 
@@ -61,38 +61,38 @@ export class App extends Component {
     }));
   };
 
-  contactValidationByName = newName => {
+  contactValidationByName(newName) {
     const { contacts } = this.state;
     return contacts.some(({ name }) => name === newName);
-  };
+  }
 
-  getFilterContacts = () => {
+  getFilterContacts() {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
-  };
+  }
 
   render() {
     const { filter } = this.state;
     const filteredContacts = this.getFilterContacts();
 
     return (
-      <Container>
+      <S.Container>
         <GlobalStyle />
 
-        <PrimaryTitle>Phonebook</PrimaryTitle>
+        <S.PrimaryTitle>Phonebook</S.PrimaryTitle>
         <ContactForm onSubmit={this.addContact} />
 
-        <SecondaryTitle>Contacts</SecondaryTitle>
+        <S.SecondaryTitle>Contacts</S.SecondaryTitle>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
           contacts={filteredContacts}
           onDeleteContact={this.deleteContact}
         />
-      </Container>
+      </S.Container>
     );
   }
 }
