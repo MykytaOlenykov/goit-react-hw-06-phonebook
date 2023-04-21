@@ -1,3 +1,3 @@
 export const storageKeys = {
-  DATA_CONTACTS_L_STORAGE_KEY: 'contacts-data',
+  DATA_CONTACTS_LS_KEY: 'contacts-data',
 };

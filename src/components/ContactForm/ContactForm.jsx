@@ -1,16 +1,8 @@
-import { Formik, ErrorMessage } from 'formik';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import * as S from './ContactForm.styled';
-
-const FormError = ({ name }) => {
-  return (
-    <ErrorMessage
-      name={name}
-      render={message => <S.ErrorText>{message}</S.ErrorText>}
-    />
-  );
-};
 
 const validatePattern = {
   name: /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
@@ -41,33 +33,38 @@ const initialValues = {
 };
 
 export const ContactForm = ({ onSubmit }) => {
-  const handleSubmit = (values, { resetForm }) => {
-    onSubmit(values);
-    resetForm();
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: initialValues,
+    resolver: yupResolver(schema),
+  });
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={schema}
-      onSubmit={handleSubmit}
+    <S.ContactForm
+      autoComplete="off"
+      onSubmit={handleSubmit(data => {
+        onSubmit(data);
+        reset();
+      })}
     >
-      <S.ContactForm autoComplete="off">
-        <S.Label>
-          Name
-          <S.Input type="text" name="name" />
-          <FormError name="name" />
-        </S.Label>
+      <S.Label>
+        Name
+        <S.Input {...register('name')} type="text" />
+        {errors.name && <S.ErrorText>{errors.name?.message}</S.ErrorText>}
+      </S.Label>
 
-        <S.Label>
-          Number
-          <S.Input type="tel" name="number" />
-          <FormError name="number" />
-        </S.Label>
+      <S.Label>
+        Number
+        <S.Input {...register('number')} type="tel" />
+        {errors.number && <S.ErrorText>{errors.number?.message}</S.ErrorText>}
+      </S.Label>
 
-        <S.Button type="submit">Add contact</S.Button>
-      </S.ContactForm>
-    </Formik>
+      <S.Button type="submit">Add contact</S.Button>
+    </S.ContactForm>
   );
 };
 
