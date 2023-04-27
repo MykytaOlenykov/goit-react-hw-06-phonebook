@@ -20,7 +20,7 @@ export const Input = styled.input`
     0px 1px 1px rgba(0, 0, 0, 0.14);
   outline: none;
 
-  :focus {
+  &:focus {
     border-color: ${({ theme }) => theme.colors.secondaryBg};
   }
 `;
@@ -51,7 +51,7 @@ export const Button = styled.button`
     ${({ theme }) => `${theme.duration} ${theme.timingFunction}`};
   cursor: pointer;
 
-  :hover {
+  &:hover {
     background-color: ${({ theme }) => theme.colors.secondaryBg};
   }
 `;
