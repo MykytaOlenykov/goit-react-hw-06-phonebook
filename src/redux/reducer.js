@@ -1,3 +1,5 @@
+import { addContact, deleteContact, changeFilter } from './actions';
+
 const contactsInitialState = [
   { id: 'v7NdUb7-2qZndfhGS2Fwj', name: 'Fig', number: '123123213' },
   { id: 'zgDoKRl-0Vwh6kGhnRC_5', name: 'wwww', number: '123123' },
@@ -9,9 +11,9 @@ const contactsInitialState = [
 
 export const contactsReducer = (state = contactsInitialState, action) => {
   switch (action.type) {
-    case 'contacts/addContact':
-      return [...state.contacts, action.payload];
-    case 'contacts/deleteContact':
+    case addContact.type:
+      return [...state, action.payload];
+    case deleteContact.type:
       return state.filter(contact => contact.id !== action.payload);
     default:
       return state;
@@ -22,7 +24,7 @@ const filterInitialState = '';
 
 export const filterReducer = (state = filterInitialState, action) => {
   switch (action.type) {
-    case 'filter/changeFilter':
+    case changeFilter.type:
       return action.payload;
     default:
       return state;
