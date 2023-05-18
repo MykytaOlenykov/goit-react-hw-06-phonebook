@@ -1,4 +1,4 @@
-export const theme = {
+const theme = Object.freeze({
   colors: {
     primary: '#fff',
     primaryBg: '#ededed',
@@ -8,4 +8,8 @@ export const theme = {
   },
   duration: '250ms',
   timingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-};
+});
+
+Object.freeze(theme.colors);
+
+export { theme };

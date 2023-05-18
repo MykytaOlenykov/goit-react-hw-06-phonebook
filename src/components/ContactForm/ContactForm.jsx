@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from 'redux/actions';
+import { getContacts } from 'redux/selectors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import PropTypes from 'prop-types';
 import * as S from './ContactForm.styled';
 
 const validatePattern = {
@@ -32,7 +34,7 @@ const initialValues = {
   number: '',
 };
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
   const {
     register,
     handleSubmit,
@@ -42,13 +44,28 @@ export const ContactForm = ({ onSubmit }) => {
     defaultValues: initialValues,
     resolver: yupResolver(schema),
   });
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
+  const onSubmit = ({ name, number }) => {
+    if (contactValidationByName(name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
+    dispatch(addContact({ name, number }));
+    reset();
+  };
+
+  const contactValidationByName = newName => {
+    return contacts.some(({ name }) => name === newName);
+  };
 
   return (
     <S.ContactForm
       autoComplete="off"
       onSubmit={handleSubmit(data => {
         onSubmit(data);
-        reset();
       })}
     >
       <S.Label>
@@ -66,8 +83,4 @@ export const ContactForm = ({ onSubmit }) => {
       <S.Button type="submit">Add contact</S.Button>
     </S.ContactForm>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
