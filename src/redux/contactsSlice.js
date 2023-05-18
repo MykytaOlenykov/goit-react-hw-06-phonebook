@@ -6,11 +6,11 @@ import { storageKeys } from 'constants';
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { value: [] },
+  initialState: { items: [] },
   reducers: {
     addContact: {
       reducer(state, action) {
-        state.value.push(action.payload);
+        state.items.push(action.payload);
       },
       prepare({ name, number }) {
         return {
@@ -24,7 +24,7 @@ const contactsSlice = createSlice({
     },
     deleteContact(state, action) {
       return {
-        value: state.value.filter(contact => contact.id !== action.payload),
+        items: state.items.filter(contact => contact.id !== action.payload),
       };
     },
   },
