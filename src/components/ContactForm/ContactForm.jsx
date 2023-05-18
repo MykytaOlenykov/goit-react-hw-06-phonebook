@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
