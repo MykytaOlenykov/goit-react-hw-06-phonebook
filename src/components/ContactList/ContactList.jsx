@@ -8,24 +8,24 @@ export const ContactList = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const handleDelete = contactId => {
+  const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
   };
 
-  const getFilteredContacts = () => {
+  const getVisibleContacts = () => {
     return contacts.filter(({ name }) => name.toLowerCase().includes(filter));
   };
 
-  const filteredContacts = getFilteredContacts();
+  const visibleContacts = getVisibleContacts();
 
   return (
     <S.List>
-      {filteredContacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ id, name, number }) => (
         <S.Item key={id}>
           <p>
             {name}: {number}
           </p>
-          <S.Button type="button" onClick={() => handleDelete(id)}>
+          <S.Button type="button" onClick={() => handleDeleteContact(id)}>
             Delete
           </S.Button>
         </S.Item>
