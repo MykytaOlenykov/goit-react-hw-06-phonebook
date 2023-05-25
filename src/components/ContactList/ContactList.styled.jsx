@@ -9,7 +9,6 @@ export const Item = styled.li`
   gap: 10px;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   max-width: 400px;
   width: 100%;
   padding: 8px 16px;

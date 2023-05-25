@@ -1,8 +1,8 @@
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
+import { ContactList } from 'components/ContactList';
 import { GlobalStyle } from 'components/GlobalStyle';
 import * as S from './App.styled';
-import { ContactList } from 'components/ContactList';
 
 export const App = () => (
   <S.Container>

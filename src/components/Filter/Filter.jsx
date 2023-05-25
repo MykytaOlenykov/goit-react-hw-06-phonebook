@@ -7,7 +7,7 @@ export const Filter = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const handleChange = e => {
+  const handleChangeFilter = e => {
     dispatch(changeFilter(e.target.value.toLowerCase().trim()));
   };
 
@@ -15,7 +15,7 @@ export const Filter = () => {
     <>
       <p>Find contacts by name</p>
       <S.Input
-        onChange={handleChange}
+        onChange={handleChangeFilter}
         value={filter}
         name="filter"
         type="text"

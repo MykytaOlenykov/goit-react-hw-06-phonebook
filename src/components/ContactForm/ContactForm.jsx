@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { addContact } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
+import { getNormalizedName } from 'utils';
 import * as S from './ContactForm.styled';
 
 const validatePattern = {
-  name: /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+  name: /^(?!^\s+$)[\sa-zA-Zа-яА-ЯґҐєЄіІїЇ]+((['-][\sa-zA-Zа-яА-ЯґҐєЄіІїЇ]+)([ ]?[\sa-zA-Zа-яА-ЯґҐєЄіІїЇ]+))*$/,
   number:
     /^\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
 };
@@ -48,12 +49,14 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = ({ name, number }) => {
-    if (contactValidationByName(name)) {
-      alert(`${name} is already in contacts.`);
+    const normalizedName = getNormalizedName(name);
+
+    if (contactValidationByName(normalizedName)) {
+      alert(`${normalizedName} is already in contacts.`);
       return;
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ name: normalizedName, number }));
     reset();
   };
 
